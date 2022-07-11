@@ -15,7 +15,12 @@ namespace SourceTreeActionShell
             else if (args.FirstOrDefault()?.Equals(CommandType.MergeRequest.GetInfo().Command, StringComparison.OrdinalIgnoreCase) ?? false)
             {
                 var projectPath = getArgsString(args, CommandParam.ProjectPath.GetInfo().Command);
-                //MergeRequest.OpenMergeRequest("", "", "");
+                if (!Directory.Exists(projectPath))
+                {
+                    throw new Exception($"目录不存在：{projectPath}");
+                }
+                var targetBranch = GetArgsString(args, CommandParam.TargetBranch.GetInfo().Command);
+                MergeRequest.OpenMergeRequest("", "", targetBranch);
             }
             else
             {
@@ -24,12 +29,12 @@ namespace SourceTreeActionShell
             Console.ReadLine();
         }
 
-        private static string getArgsString(string[] args, string paramName)
+        private static string GetArgsString(string[] args, string paramName)
         {
-            var argss = args.FirstOrDefault(a => a.Contains(paramName)).Split("=", StringSplitOptions.RemoveEmptyEntries);
-            if (argss.Length != 2)
+            var argss = args.FirstOrDefault(a => a.Contains(paramName, StringComparison.CurrentCultureIgnoreCase))?.Split("=", StringSplitOptions.RemoveEmptyEntries);
+            if (argss == null || argss.Length != 2 || string.IsNullOrWhiteSpace(argss[1]))
                 throw new Exception($"请传入参数：{paramName}");
-            return argss[1];
+            return argss[1].Trim();
         }
     }
 }
