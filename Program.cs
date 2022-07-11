@@ -14,13 +14,22 @@ namespace SourceTreeActionShell
             }
             else if (args.FirstOrDefault()?.Equals(CommandType.MergeRequest.GetInfo().Command, StringComparison.OrdinalIgnoreCase) ?? false)
             {
-                MergeRequest.OpenMergeRequest();
+                var projectPath = getArgsString(args, CommandParam.ProjectPath.GetInfo().Command);
+                //MergeRequest.OpenMergeRequest("", "", "");
             }
             else
             {
                 Console.WriteLine("未知命令");
             }
             Console.ReadLine();
+        }
+
+        private static string getArgsString(string[] args, string paramName)
+        {
+            var argss = args.FirstOrDefault(a => a.Contains(paramName)).Split("=", StringSplitOptions.RemoveEmptyEntries);
+            if (argss.Length != 2)
+                throw new Exception($"请传入参数：{paramName}");
+            return argss[1];
         }
     }
 }

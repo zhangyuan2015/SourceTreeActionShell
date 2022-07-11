@@ -12,7 +12,7 @@ namespace SourceTreeActionShell
 
     public static class CommandTypeEx
     {
-        public static CommandTypeInfo GetInfo(this CommandType enumValue)
+        public static CommandTypeInfo GetInfo<T>(this T enumValue)
         {
             string value = enumValue.ToString();
             FieldInfo? field = enumValue.GetType()?.GetField(value);
