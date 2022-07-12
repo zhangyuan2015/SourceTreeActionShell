@@ -7,8 +7,6 @@ namespace SourceTreeActionShell
     {
         static void Main(string[] args)
         {
-            //args = new string[] { "--merge-request", "ProjectPath=D:\\Projects\\LmsCode\\Develop\\lms-api", "TargetBranch=test", "GitScheme=GitLab" };
-
             EnumCommandType.Help.GetCommandInfo();
             if (args == null || args.Length == 0 || (args.FirstOrDefault()?.Equals(EnumCommandType.Help.GetCommandInfo().Command, StringComparison.OrdinalIgnoreCase) ?? false))
             {

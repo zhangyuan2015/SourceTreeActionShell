@@ -6,7 +6,7 @@ namespace SourceTreeActionShell
     {
         [CommandInfo("--Help", "帮助")]
         Help,
-        [CommandInfo("--merge-request", "发起一个合并请求", new[] { EnumCommandParam.ProjectPath, EnumCommandParam.TargetBranch })]
+        [CommandInfo("--merge-request", "发起一个合并请求", new[] { EnumCommandParam.ProjectPath, EnumCommandParam.TargetBranch, EnumCommandParam.GitScheme })]
         MergeRequest
     }
 }
