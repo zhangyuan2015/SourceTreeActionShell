@@ -4,7 +4,7 @@
     {
         public static void OutputHelpContent()
         {
-            var commandInfos = CommandTypeEx.GetInfos();
+            var commandInfos = EnumHelper.GetCommandInfos<EnumCommandType>();
             foreach (var commandInfo in commandInfos)
             {
                 List<string> paramInfos = new List<string>();
@@ -12,7 +12,7 @@
                 {
                     foreach (var param in commandInfo.Params)
                     {
-                        var info = param.GetInfo();
+                        var info = param.GetCommandInfo();
                         paramInfos.Add($"{info.Command}={info.Description}");
                     }
                 }
